@@ -20,14 +20,34 @@ public class ListaEstatica {
         }
         info = novo;
     }
-    
-    public void inserir(int valor){
-        if (tamanho == info.length){
+
+    public void inserir(int valor) {
+        if (tamanho == info.length) {
             redimensionar();
         }
-        info[tamanho] = valor;
+        int i;
+        for (i = tamanho; i > 0 && info[i - 1] > valor; i--) { // -1 é para pegar o indice correto do tamanho
+            info[i] = info[i - 1]; // Desloca os elementos para a direita. Ex: tamanho = 4 indice 4 recebe valor do indice 3
+        }
+        info[i] = valor;
         tamanho++;
     }
+    /* Exemplo:
+    Lista inicial: [10, 20, 30, 40, _, _, _] (tamanho = 4)
+
+    1 Inicializa i = tamanho = 4
+    2 Verifica: info[3] (40) > 25, então move 40 → info[4].
+    3 Verifica: info[2] (30) > 25, então move 30 → info[3].
+    4 Verifica: info[1] (20) < 25, então PARA.
+    5 Insere 25 em info[2].
+
+    FINAL: [10, 20, 25, 30, 40, _, _]  // (tamanho = 5)
+    */
+
+
+
+
+
 
     public void exibir(){
         for (int i = 0; i < tamanho; i++) {

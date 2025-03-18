@@ -155,6 +155,23 @@ public class ListaDupla<T> {
         return clone;
     }
 
+    /*
+    Suponha que temos a seguinte lista duplamente encadeada:
+
+    Lista original:
+    [ A ⇄ B ⇄ C ⇄ D ]
+
+    Agora chamamos clone(). O método segue estes passos:
+
+    1 Inicializa `p = primeiro`, `clone` vazio, e `anterior = null`.
+    2 Cria um novo nó `A'` e define `clone.primeiro = A'`.
+    3 Cria um novo nó `B'`, ajusta `A' ⇄ B'`, e atualiza `anterior = B'`.
+    4 Cria um novo nó `C'`, ajusta `B' ⇄ C'`, e atualiza `anterior = C'`.
+    5 Cria um novo nó `D'`, ajusta `C' ⇄ D'`, e atualiza `anterior = D'`.
+
+    Lista clonada final:
+    [ A' ⇄ B' ⇄ C' ⇄ D' ]
+    */
 
 
 
