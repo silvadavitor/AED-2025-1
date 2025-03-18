@@ -93,4 +93,23 @@ public class ListaDuplaTest {
         lista.liberar();
         assertTrue(lista.estaVazia());
     }
+
+    @Test
+    void testClonarLista() {
+        ListaDupla<Integer> listaOriginal = new ListaDupla<>();
+        listaOriginal.inserir(5);
+        listaOriginal.inserir(10);
+        listaOriginal.inserir(15);
+        listaOriginal.inserir(20);
+        
+        ListaDupla<Integer> listaClone = listaOriginal.clone();
+        
+        assertEquals("20,15,10,5", listaClone.toString());
+        
+        assertEquals("20,15,10,5", listaOriginal.toString());
+        
+        listaClone.retirar(10);
+        assertEquals("20,15,5", listaClone.toString()); 
+        assertEquals("20,15,10,5", listaOriginal.toString());
+    }
 }
