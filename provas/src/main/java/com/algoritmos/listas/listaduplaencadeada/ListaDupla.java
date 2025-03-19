@@ -99,18 +99,27 @@ public class ListaDupla<T> {
         NoListaDupla<T> p = this.primeiro;
 
         while (p != null){
-            if(p != null)
-            if (primeiro == p){
-                primeiro = p.getProximo();
-            }
-            else{
-                p.getAnterior().setProximo(p.getProximo());
-            }
-            if (p.getProximo() != null){
-                p.getProximo().setAnterior(p.getAnterior());
-            }
+            p.setAnterior(null);
+            NoListaDuola save = p.getProximo();
+            p.setProximo(null);
+            
+        }
+        primeiro = null;
+    }
+
+
+    public NoListaDupla<T> buscarUltimo() {
+        NoListaDupla<T> p = this.primeiro;
+    
+        if (p == null) {
+            return null; 
+        }
+    
+        while (p.getProximo() != null) {
             p = p.getProximo();
         }
+    
+        return p;
     }
 
 

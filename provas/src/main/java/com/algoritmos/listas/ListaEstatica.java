@@ -32,6 +32,9 @@ public class ListaEstatica {
         info[i] = valor;
         tamanho++;
     }
+
+
+
     /* Exemplo:
     Lista inicial: [10, 20, 30, 40, _, _, _] (tamanho = 4)
 

@@ -83,15 +83,14 @@ public class ListaDupla<T> {
     }
 
 
-    public ListaDupla<T> exibirOrdemInversa(){
+    public void exibirOrdemInversa(){
         ListaDupla<T> invertida = new ListaDupla<T>();
         NoListaDupla<T> p = this.primeiro;
         
         while (p != null){
-            invertida.inserir(p.getInfo());
+            System.out.println((p.getInfo()));
             p = p.getProximo();
         }
-        return invertida;
     }
 
 
@@ -99,60 +98,53 @@ public class ListaDupla<T> {
         NoListaDupla<T> p = this.primeiro;
 
         while (p != null){
-            if(p != null)
-            if (primeiro == p){
-                primeiro = p.getProximo();
-            }
-            else{
-                p.getAnterior().setProximo(p.getProximo());
-            }
-            if (p.getProximo() != null){
-                p.getProximo().setAnterior(p.getAnterior());
-            }
+            p.setAnterior(null);
+            NoListaDuola save = p.getProximo();
+            p.setProximo(null);
+            
+        }
+        primeiro = null;
+    }
+
+
+    public NoListaDupla<T> buscarUltimo() {
+        NoListaDupla<T> p = this.primeiro;
+    
+        if (p == null) {
+            return null; 
+        }
+    
+        while (p.getProximo() != null) {
             p = p.getProximo();
         }
+    
+        return p;
     }
 
 
 
-
-
     public ListaDupla<T> clone() {
-        // Cria uma nova lista vazia que armazenará a cópia
         ListaDupla<T> clone = new ListaDupla<>();
         
-        // Ponteiro para percorrer a lista original
         NoListaDupla<T> p = this.primeiro;
         
-        // Variável para armazenar o último nó inserido na lista clonada
         NoListaDupla<T> anterior = null;
         
-        // Percorre toda a lista original
         while (p != null) {
-            // Cria um novo nó para a lista clonada
             NoListaDupla<T> novo = new NoListaDupla<>();
             
-            // Copia o valor do nó original para o novo nó
             novo.setInfo(p.getInfo());
             
-            // Se a lista clonada ainda estiver vazia, define o primeiro nó
             if (clone.primeiro == null) {
                 clone.primeiro = novo;
             } else {
-                // Caso contrário, ajusta os ponteiros do nó anterior
                 anterior.setProximo(novo);
                 novo.setAnterior(anterior);
             }
-            
-            // Atualiza o nó anterior para o novo nó criado
             anterior = novo;
-            
-            // Move o ponteiro para o próximo nó da lista original
             p = p.getProximo();
         }
-        
-        // Retorna a nova lista clonada
-        return clone;
+                return clone;
     }
 
 
