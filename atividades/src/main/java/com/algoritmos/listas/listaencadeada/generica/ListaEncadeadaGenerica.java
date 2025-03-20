@@ -121,6 +121,33 @@ public class ListaEncadeadaGenerica<T> {
         }
         return invertida;
     }
+
+    public void anexar(ListaGenerica<T> l2) {
+        // Se a lista estática estiver vazia, não há nada para anexar
+        if (l2.estaVazia()) {
+            return;
+        }
+    
+        // Encontrar o último nó da lista encadeada atual
+        NoLista<T> p = this.primeiro;
+        if (p == null) {
+            // Se a lista encadeada estiver vazia, simplesmente copiar os elementos de l2
+            this.primeiro = new NoLista<T>();
+            this.primeiro.setInfo(l2.obterElemento(0));
+            p = this.primeiro;
+        }
+        while (p.getProximo() != null) {
+            p = p.getProximo();
+        }
+    
+        // Percorrer a lista estática e adicionar os elementos ao final da lista encadeada
+        for (int i = 0; i < l2.getTamanho(); i++) {
+            NoLista<T> novo = new NoLista<T>();
+            novo.setInfo(l2.obterElemento(i));
+            p.setProximo(novo);
+            p = novo; // Atualizar p para o novo nó
+        }
+    
 }
 
 

@@ -108,6 +108,30 @@ public class ListaGenerica<T> {
     e joga no ultimo oque tava no temp (valor do primeiro indice)
     */ 
 
+
+
+    public void retirarElementos(int inicio, int fim) {
+        int posicaoInicio = buscar(inicio);
+        int posicaoFim = buscar(fim);
+    
+        if (posicaoInicio == -1 || posicaoFim == -1 || posicaoInicio > posicaoFim) {
+            throw new IndexOutOfBoundsException("Índices inválidos");
+        }
+    
+        int qtdRemovidos = posicaoFim - posicaoInicio + 1;
+    
+        for (int i = posicaoInicio; i < tamanho - qtdRemovidos; i++) {
+            info[i] = info[i + qtdRemovidos];
+        }
+    
+        for (int i = tamanho - qtdRemovidos; i < tamanho; i++) {
+            info[i] = null;
+        }
+    
+        tamanho -= qtdRemovidos;
+    }
+    
+
 }
 
 
