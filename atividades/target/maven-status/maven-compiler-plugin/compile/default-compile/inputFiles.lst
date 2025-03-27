@@ -1,8 +1,13 @@
-/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/ListaEstatica.java
-/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/ListaGenerica.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaEstativa/ListaEstatica.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaEstativa/ListaGenerica.java
 /home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaduplaencadeada/ListaDupla.java
 /home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaduplaencadeada/NoListaDupla.java
 /home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaencadeada/estatica/ListaEncadeada.java
 /home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaencadeada/estatica/NoLista.java
 /home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaencadeada/generica/ListaEncadeadaGenerica.java
 /home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/listas/listaencadeada/generica/NoLista.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/pilhas/pilhaListaEncadeada/pilhaLista.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/pilhas/pilhaVetor/Pilha.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/pilhas/pilhaVetor/PilhaCheiaException.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/pilhas/pilhaVetor/PilhaVaziaException.java
+/home/vitor-nuvme/FURB/Algoritmos_Estrutura_Dados/meu-projeto/atividades/src/main/java/com/algoritmos/pilhas/pilhaVetor/PilhaVetor.java

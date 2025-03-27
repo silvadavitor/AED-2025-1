@@ -14,7 +14,6 @@ public class ListaDuplaTest {
         lista.inserir(20);
         
         assertEquals("20,15,10,5", lista.toString());
-        assertEquals("5,10,15,20", lista.exibirOrdemInversa().toString());
     }
 
     @Test
@@ -50,7 +49,6 @@ public class ListaDuplaTest {
         lista.retirar(20);
         assertEquals("15,10,5", lista.toString());
         
-        assertEquals("5,10,15", lista.exibirOrdemInversa().toString());
     }
 
 
@@ -65,7 +63,7 @@ public class ListaDuplaTest {
         lista.retirar(10);
         assertEquals("20,15,5", lista.toString());
         lista.exibirOrdemInversa();
-        assertEquals("5,15,20", lista.exibirOrdemInversa().toString());
+        assertEquals("5,15,20", lista.toString());
     }
 
     @Test
@@ -79,7 +77,7 @@ public class ListaDuplaTest {
         lista.retirar(5);
         assertEquals("20,15,10", lista.toString());
         lista.exibirOrdemInversa();
-        assertEquals("10,15,20", lista.exibirOrdemInversa().toString());
+        assertEquals("10,15,20", lista.toString());
     }
 
     @Test

@@ -110,7 +110,7 @@ public class ListaGenerica<T> {
 
 
 
-    public void retirarElementos(int inicio, int fim) {
+    public void retirarElementos(T inicio, T fim) {
         int posicaoInicio = buscar(inicio);
         int posicaoFim = buscar(fim);
     
