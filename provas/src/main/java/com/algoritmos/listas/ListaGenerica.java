@@ -62,12 +62,12 @@ public class ListaGenerica<T> {
         info = new Object[10];
     }
 
-    public T obterElemento(int posicao){
-        if (posicao < 0 || posicao >= tamanho){
-            throw new IndexOutOfBoundsException("Índice ultrapassou os limites: " + posicao);
-        }
-        return (T) info[posicao];
-    }
+    // public T obterElemento(int posicao){
+    //     if (posicao < 0 || posicao >= tamanho){
+    //         throw new IndexOutOfBoundsException("Índice ultrapassou os limites: " + posicao);
+    //     }
+    //     // return (T) info[posicao];
+    // }
 
 
     public boolean estaVazia(){

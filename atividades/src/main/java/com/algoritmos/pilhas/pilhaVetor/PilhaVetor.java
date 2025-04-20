@@ -6,11 +6,11 @@ public class  PilhaVetor<T> implements Pilha<T>{
 
     private int limite;
     private int tamanho;
-    private T[] info;
+    private Object[] info;
 
 
-    PilhaVetor(int limite){
-        info = (T[]) new Object[limite];
+    public PilhaVetor(int limite){
+        info = new Object[limite];
         this.limite = limite;
         this.tamanho = 0;
     }
@@ -31,7 +31,7 @@ public class  PilhaVetor<T> implements Pilha<T>{
             throw new PilhaVaziaException();
         }
 
-        return info[tamanho-1];
+        return (T) info[tamanho-1];
     }
 
     @Override
@@ -60,7 +60,7 @@ public class  PilhaVetor<T> implements Pilha<T>{
     @Override
     public void liberar(){
         tamanho = 0;
-        info = (T[]) new Object[limite];
+        info = new Object[limite];
     }
     
     public String toString() {
@@ -84,9 +84,27 @@ public class  PilhaVetor<T> implements Pilha<T>{
             throw new PilhaCheiaException();
         }
         for (int i = 0; i < p.tamanho; i++) {
-            this.push(p.info[i]);
+            this.push((T)p.info[i]);
         }
     }
 
+
+
+    // OUTRO JEITO DE FAZER
+    // public void concatenar(PilhaVetor<T> p) throws PilhaCheiaException {
+
+	// 	if (tamanho + p.tamanho > limite) {
+	// 		throw new PilhaCheiaException("A pilha está cheia");
+	// 	}
+
+	// 	PilhaVetor<T> pilhaP = new PilhaVetor<>(limite - tamanho);
+
+	// 	while (!p.estaVazia()) {
+	// 		pilhaP.push(p.pop());
+	// 	}
+
+	// 	while (!pilhaP.estaVazia()) {
+	// 		this.push(pilhaP.pop());
+	// 	}
 
 }

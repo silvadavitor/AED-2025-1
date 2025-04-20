@@ -100,7 +100,7 @@ public class ListaDupla<T> {
 
         while (p != null){
             p.setAnterior(null);
-            NoListaDuola save = p.getProximo();
+            // NoListaDupla save = p.getProximo();
             p.setProximo(null);
             
         }
