@@ -1,6 +1,9 @@
 package com.algoritmos.filas.filaVetor;
 
 import org.junit.jupiter.api.Test;
+
+import com.algoritmos.pilhas.pilhaVetor.PilhaVetor;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FilaVetorTest {
@@ -118,5 +121,64 @@ public class FilaVetorTest {
         assertEquals("2,3", fila.toString());
         assertEquals(2, fila.getLimite()); // verifica se o vetor foi realmente reduzido
     }
+
+    // teste para o metodo empilhar
+    @Test
+    public void testEmpilhar() {
+        FilaVetor<Integer> fila = new FilaVetor<>(5);
+        fila.inserir(1);
+        fila.inserir(2);
+        fila.inserir(3);
+
+        System.out.println("Fila antes de empilhar:");
+        System.out.println(fila.toString());
+
+        // Cria uma pilha e empilha os elementos da fila
+        PilhaVetor<Integer> pilha = fila.empilhar(fila);
+        
+        System.out.println("Pilha após empilhar a fila:");
+        System.out.println(pilha.toString());
+    }
+
+    // teste para o metodo aumentar
+    @Test
+    public void testAumentar() {
+        FilaVetor<Integer> fila = new FilaVetor<>(5);
+        fila.inserir(1);
+        fila.inserir(2);
+        fila.inserir(3);
+
+        System.out.println("Antigo limite: " + fila.getLimite());
+        System.out.println("Fila antes de aumentar:");
+        System.out.println(fila.toString());
+
+
+        // Aumenta a capacidade da fila
+        fila.aumentar(10);
+
+        System.out.println("Fila após aumentar:");
+        System.out.println(fila.toString());
+        System.out.println("Novo limite: " + fila.getLimite());
+    }
+    
+    // teste para o metodo inverter
+    @Test
+    public void testInverter() {
+        FilaVetor<Integer> fila = new FilaVetor<>(5);
+        fila.inserir(5);
+        fila.inserir(3);
+        fila.inserir(2);
+
+        System.out.println("Fila antes de inverter:");
+        System.out.println(fila.toString());
+
+        // Inverte a fila
+        fila.inverter();
+
+        System.out.println("Fila após inverter:");
+        System.out.println(fila.toString());
+    }
+
+
 
 }

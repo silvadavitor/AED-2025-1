@@ -135,7 +135,7 @@ public class FilaVetor<T> implements Fila<T> {
 
 
     // DESSE JEITO EU ESVAZIO A FILA E EMPILHO NA PILHA
-    public void empilhar(FilaVetor<T> fila) {
+    public PilhaVetor<T> empilhar(FilaVetor<T> fila) {
         PilhaVetor<T> pilha = new PilhaVetor<T>(fila.getTamanho());
 
         // int tamanhoInicialFila = fila.getTamanho();
@@ -143,14 +143,12 @@ public class FilaVetor<T> implements Fila<T> {
         while (!fila.estaVazia()) {
             pilha.push(fila.retirar());
         }
-
-        System.out.println("Conteúdo da pilha: " + pilha.toString());
-        System.out.println("Conteúdo da fila: " + fila.toString());
+        return pilha;
     }
 
 
     /* DESSE JEITO EU EMPILHO A FILA SEM RETIRAR NADA DELA
-    public void empilhar(FilaVetor<T> fila) {
+    public PilhaVetor<T> empilhar(FilaVetor<T> fila) {
         PilhaVetor<T> pilha = new PilhaVetor<>(fila.getTamanho());
     
         int index = fila.getInicio();
@@ -158,15 +156,43 @@ public class FilaVetor<T> implements Fila<T> {
             pilha.push(fila.getInfo()[index]);
             index = (index + 1) % fila.getLimite();
         }
-    
-        System.out.println("Conteúdo da pilha: " + pilha.toString());
-        System.out.println("Conteúdo da fila (original mantida): " + fila.toString());
+
+        return pilha;
     }
-        */
+    */
     
 
     
-    
+    // Metodo para aumentar o tamanho da fila lembrando que e um vetor circular
+    public void aumentar(int novoLimite) {
+        if (novoLimite <= limite) {
+            throw new IllegalArgumentException("Novo limite deve ser maior que o atual.");
+        }
+
+        T[] novo = (T[]) new Object[novoLimite];
+        int posicao = inicio;
+
+        for (int i = 0; i < tamanho; i++) {
+            novo[i] = info[posicao];
+            posicao = (posicao + 1) % limite;
+        }
+        this.info = novo;
+        this.limite = novoLimite;
+        this.inicio = 0;
+    }
+
+    // Inverte a fila
+    public void inverter() {
+        PilhaVetor<T> pilha = new PilhaVetor<>(tamanho);
+        while (!estaVazia()) {
+            pilha.push(retirar());
+        }
+        while (!pilha.estaVazia()) {
+            inserir(pilha.pop());
+        }
+    }
+
+
     public T[] getInfo() {
         return info;
     }
