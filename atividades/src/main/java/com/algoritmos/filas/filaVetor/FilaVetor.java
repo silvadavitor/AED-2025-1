@@ -103,7 +103,7 @@ public class FilaVetor<T> implements Fila<T> {
         return limite;
     }
 
-
+    //metodo encolher
     public void encolher(){
         FilaVetor<T> novaFila = new FilaVetor<>(tamanho);
         int index = inicio;

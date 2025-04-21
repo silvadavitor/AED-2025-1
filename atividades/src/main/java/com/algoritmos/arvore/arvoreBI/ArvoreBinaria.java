@@ -30,7 +30,9 @@ public class ArvoreBinaria<T> {
         }
            
     }
+    
 
+    // Le no pré
     public String toString() {
         return arvorePre(raiz);
     }
@@ -135,6 +137,121 @@ public class ArvoreBinaria<T> {
         }
         return visitas;
     }
+
+    // Le no na pos ordem   
+    public String arvorePos() {
+        return arvorePos(raiz);
+    }
+
+    private String arvorePos(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "<>";
+        }
+        return "<" + arvorePos(no.getEsquerda()) + arvorePos(no.getDireita()) + no.getInfo() + ">";
+    }
+
+    // Le no na simetria
+    public String arvoreSimetrica() {
+        return arvoreSimetrica(raiz);
+    }
+
+    private String arvoreSimetrica(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "<>";
+        }
+        return "<" + arvoreSimetrica(no.getEsquerda()) + no.getInfo() + arvoreSimetrica(no.getDireita()) + ">";
+    }
+
+    
+    // // Conta o número de nós na árvore binária.
+    // public int contarNos() {
+    //     return contarNos(raiz);
+    // }
+
+    // private int contarNos(NoArvoreBinaria<T> no) {
+    //     if (no == null) {
+    //         return 0;
+    //     }
+    //     return 1 + contarNos(no.getEsq()) + contarNos(no.getDir());
+    // }
+
+
+    // Verifica se arvore e desgenerada ou nao
+    public boolean eDegenerada() {
+        return eDegenerada(raiz);
+    }
+
+    private boolean eDegenerada(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return true;
+        }
+        if (no.getEsquerda() == null && no.getDireita() == null) {
+            return true;
+        }
+        if (no.getEsquerda() != null && no.getDireita() != null) {
+            return false;
+        }
+        return eDegenerada(no.getEsquerda()) && eDegenerada(no.getDireita());
+    }
+
+    // // Conta o número de folhas (nós sem filhos).
+    // public int contarFolhas() {
+    //     return contarFolhas(raiz);
+    // }
+
+    // private int contarFolhas(NoArvoreBinaria<T> no) {
+    //     if (no == null) {
+    //         return 0;
+    //     }
+    //     if (no.getEsq() == null && no.getDir() == null) {
+    //         return 1;
+    //     }
+    //     return contarFolhas(no.getEsq()) + contarFolhas(no.getDir());
+    // }
+
+    // // Conta o número de nós internos (nós que não são folhas).
+    // public int contarNosInternos() {
+    //     return contarNosInternos(raiz);
+    // }
+
+    // private int contarNosInternos(NoArvoreBinaria<T> no) {
+    //     if (no == null) {
+    //         return 0;
+    //     }
+    //     if (no.getEsq() == null && no.getDir() == null) {
+    //         return 0;
+    //     }
+    //     return 1 + contarNosInternos(no.getEsq()) + contarNosInternos(no.getDir());
+    // }
+
+    // Conta a altura da árvore binária.
+    // A altura de uma árvore vazia é -1, e a altura de uma árvore com um nó é 0.
+    public int contarAltura() {
+        return contarAltura(raiz);
+    }
+
+    private int contarAltura(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return -1;
+        }
+        return 1 + Math.max(contarAltura(no.getEsquerda()), contarAltura(no.getDireita()));
+    }
+
+    // Conta o número de nós que possuem pelo menos um filho (esquerdo ou direito).
+    public int contarNosComFilhos() {
+        return contarNosComFilhos(raiz);
+    }
+
+    private int contarNosComFilhos(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return 0;
+        }
+        if (no.getEsquerda() != null || no.getDireita() != null) {
+            return 1 + contarNosComFilhos(no.getEsquerda()) + contarNosComFilhos(no.getDireira());
+        }
+        return contarNosComFilhos(no.getEsquerda()) + contarNosComFilhos(no.getDireira());
+    }
+
 
 
 
