@@ -1,6 +1,5 @@
 package com.algoritmos.filas.filaLista;
 
-import com.algoritmos.pilhas.pilhaVetor.PilhaVetor;
 
 public class FilaLista<T> implements Fila<T> {
     private ListaEncadeadaGenerica<T> lista;
