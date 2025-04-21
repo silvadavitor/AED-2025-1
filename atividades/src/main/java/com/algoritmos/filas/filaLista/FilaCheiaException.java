@@ -1,4 +1,4 @@
-package com.algoritmos.filas.FilaLista;
+package com.algoritmos.filas.filaLista;
 
 public class FilaCheiaException extends RuntimeException {
     @Override

@@ -1,26 +1,35 @@
-package com.algoritmos.filas.FilaLista;
+package com.algoritmos.filas.filaLista;
+
+import com.algoritmos.pilhas.pilhaVetor.PilhaVetor;
 
 public class FilaLista<T> implements Fila<T> {
     private ListaEncadeadaGenerica<T> lista;
 
+    // ==========================
+    // CONSTRUTOR
+    // ==========================
 
-    
-    @SuppressWarnings("unchecked")
     FilaLista() {
         lista = new ListaEncadeadaGenerica<T>();
     }
 
+    // ==========================
+    // MÉTODOS DA INTERFACE FILA
+    // ==========================
+
+    // Insere elemento no final da fila
     @Override
     public void inserir(T valor) {
-
         lista.inserirNoFinal(valor);
     }
 
+    // Verifica se a fila está vazia
     @Override
     public boolean estaVazia() {
         return lista.estaVazia();
     }
 
+    // Retorna o primeiro elemento da fila sem removê-lo
     @Override
     public T peek() {
         if (estaVazia()) {
@@ -29,48 +38,52 @@ public class FilaLista<T> implements Fila<T> {
         return lista.getPrimeiro().getInfo();
     }
 
+    // Retira o primeiro elemento da fila
     @Override
     public T retirar() {
-
         if (estaVazia()) {
             throw new FilaVaziaException();
         }
 
-        T valor = peek();
-
-        lista.retirar(valor);
+        T valor = peek(); // pega o valor antes de remover
+        lista.retirar(valor); // remove o primeiro elemento
         return valor;
     }
 
+    // Libera (esvazia) a fila
     @Override
     public void liberar() {
-        lista = new ListaEncadeadaGenerica<T>();
+        lista = new ListaEncadeadaGenerica<T>(); // recria uma nova lista vazia
     }
 
+    // ==========================
+    // OUTROS MÉTODOS (COMENTADOS)
+    // ==========================
 
-    // public FilaVetor<T> criarFilaConcatenada(FilaVetor<T> f2) {
-    //     FilaVetor<T> fila = new FilaVetor<T>(limite + f2.limite);
-    //     int index = inicio;
+    public FilaLista<T> copiar() {
+        FilaLista<T> nova = new FilaLista<>();
+        NoLista<T> atual = lista.getPrimeiro();
+    
+        while (atual != null) {
+            nova.inserir(atual.getInfo());
+            atual = atual.getProximo();
+        }
+    
+        return nova;
+    }
 
-    //     for (int i = 0; i < tamanho; i++) {
-    //         if (index == limite) index = 0;
-    //         fila.inserir(info[index]);
-    //         index++;
-    //     }
+    public void inverter() {
+        ListaEncadeadaGenerica<T> invertida = lista.criarInvertida();
+        this.lista = invertida;
+    }
 
-    //     index = f2.inicio;
-    //     for (int i = 0; i < f2.tamanho; i++) {
-    //         if (index == f2.limite) index = 0;
-    //         fila.inserir(f2.info[index]);
-    //         index++;
-    //     }
-    //     return fila;
-    // }
+    // ==========================
+    // REPRESENTAÇÃO EM TEXTO
+    // ==========================
 
+    // Retorna a representação textual da fila (delegando à lista)
     @Override
     public String toString() {
-        
         return lista.toString();
-
-}
+    }
 }

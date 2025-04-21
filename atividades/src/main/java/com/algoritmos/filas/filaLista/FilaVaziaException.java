@@ -1,4 +1,4 @@
-package com.algoritmos.filas.FilaLista;
+package com.algoritmos.filas.filaLista;
 
 public class FilaVaziaException extends RuntimeException {
     @Override
