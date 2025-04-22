@@ -3,9 +3,15 @@ package com.algoritmos.pilhas.pilhaListaEncadeada;
 
 public class ListaEncadeadaPilha<T> {
     private NoLista<T> primeiro;
-    
+    private int tamanho;
+
+    public int getTamanho() {
+        return tamanho;
+    }
+
     public ListaEncadeadaPilha() {
         this.primeiro = null;
+        this.tamanho = 0; // Inicializa tamanho como 0
     }
 
     public NoLista<T> getPrimeiro() {
@@ -18,31 +24,26 @@ public class ListaEncadeadaPilha<T> {
         novo.setInfo(valor);
         novo.setProximo(this.primeiro);
         this.primeiro = novo;
-
+        this.tamanho++; // Incrementa tamanho ao inserir
     }
 
-    public void exibir(){
+    public void exibir() {
         NoLista<T> p = this.primeiro;
 
-        while (p != null){
+        while (p != null) {
             System.out.println(p.getInfo());
-            p = p.getProximo(); // p = p.proximo
+            p = p.getProximo();
         }
     }
 
-    public boolean estaVazia(){
-        if (this.primeiro == null){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public boolean estaVazia() {
+        return this.primeiro == null;
     }
 
-    public NoLista<T> buscar(T valor){
+    public NoLista<T> buscar(T valor) {
         NoLista<T> p = this.primeiro;
 
-        while (p != null){
+        while (p != null) {
             if (p.getInfo().equals(valor)) {
                 return p;
             }
@@ -51,79 +52,83 @@ public class ListaEncadeadaPilha<T> {
         return null;
     }
 
-    public void retirar(T valor){
+    public void retirar(T valor) {
         NoLista<T> p = this.primeiro;
         NoLista<T> anterior = null;
 
-        // procura nó que contém dado a ser removido,
-        // guardando o anterior
-        while (p != null && p.getInfo() != valor){
+        // Procura nó que contém dado a ser removido, guardando o anterior
+        while (p != null && !p.getInfo().equals(valor)) {
             anterior = p;
             p = p.getProximo();
         }
 
         // Se achou nó, retira-o da lista
-        if (p != null){
-            if (p == this.primeiro){
+        if (p != null) {
+            if (p == this.primeiro) {
                 this.primeiro = p.getProximo();
-            }
-            else{
+            } else {
                 anterior.setProximo(p.getProximo());
             }
+            this.tamanho--; // Decrementa tamanho ao retirar
         }
     }
 
-
-    public int obterComprimento(){
-        NoLista<T> p = this.primeiro;
-
-        int cont = 0;
-        while (p != null){
-            cont++;
-            p = p.getProximo();
-        }
-        return cont;
+    public int obterComprimento() {
+        return this.tamanho; // Retorna diretamente o tamanho
     }
-    
-    public NoLista<T> obterNo(int idx){
-        
 
-        if (idx < 0) {
+    public NoLista<T> obterNo(int idx) {
+        if (idx < 0 || idx >= tamanho) {
             throw new IndexOutOfBoundsException("Fora dos limites.");
         }
         NoLista<T> p = getPrimeiro();
-        while (p != null && 0 < idx ){
+        while (p != null && 0 < idx) {
             idx--;
             p = p.getProximo();
         }
-        if (p == null) {
-            throw new IndexOutOfBoundsException("Fora dos limites.");
-        }
         return p;
     }
-    
-    public String toString(){
+
+    public String toString() {
         String string = "";
         NoLista<T> p = this.primeiro;
-        while (p != null){
+        while (p != null) {
             string = string + p.getInfo() + ",";
             p = p.getProximo();
         }
         return string;
     }
 
-    public ListaEncadeadaPilha<T> criarInvertida(){
+    public ListaEncadeadaPilha<T> criarInvertida() {
         ListaEncadeadaPilha<T> invertida = new ListaEncadeadaPilha<T>();
         NoLista<T> p = this.primeiro;
-        
-        while (p != null){
+
+        while (p != null) {
             invertida.inserir(p.getInfo());
             p = p.getProximo();
         }
         return invertida;
     }
 
-//     public void anexar(ListaGenerica<T> l2) {
+    // ==========================
+    // METODOS NOVOS
+    // ==========================    
+
+    // Metodo para pegar os elementos
+    public T getElemento(int index) {
+        if (index < 0 || index >= getTamanho()) {
+            throw new IndexOutOfBoundsException("Índice fora dos limites: " + index);
+        }
+
+        NoLista<T> atual = getPrimeiro();
+        for (int i = 0; i < index; i++) {
+            atual = atual.getProximo();
+        }
+
+        return atual.getInfo();
+    }
+
+    //     public void anexar(ListaGenerica<T> l2) {
 //         // Se a lista estática estiver vazia, não há nada para anexar
 //         if (l2.estaVazia()) {
 //             return;
@@ -150,5 +155,6 @@ public class ListaEncadeadaPilha<T> {
 //         }
     
 // }
+
 }
 

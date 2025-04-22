@@ -77,6 +77,9 @@ public class  PilhaVetor<T> implements Pilha<T>{
         return str.toString();
     }
 
+    // ==========================
+    // METODOS NOVOS
+    // ==========================
 
     // da o push no objeto que é varrido da pilha(que foi passada como argumento) para essa nossa pilha 
     public void concatenar(PilhaVetor<T> p){
@@ -87,8 +90,6 @@ public class  PilhaVetor<T> implements Pilha<T>{
             this.push((T)p.info[i]);
         }
     }
-
-
 
     // OUTRO JEITO DE FAZER
     // public void concatenar(PilhaVetor<T> p) throws PilhaCheiaException {
@@ -106,5 +107,81 @@ public class  PilhaVetor<T> implements Pilha<T>{
 	// 	while (!pilhaP.estaVazia()) {
 	// 		this.push(pilhaP.pop());
 	// 	}
+
+    // Metodo para inverter a pilha
+    public void inverter() {
+        PilhaVetor<T> pilhaAux = new PilhaVetor<>(limite);
+        while (!estaVazia()) {
+            pilhaAux.push(pop());
+        }
+        while (!pilhaAux.estaVazia()) {
+            push(pilhaAux.pop());
+        }
+    }
+
+    /*// Metodo para inverter a pilha usando recursividade
+    public void inverterRecursivo() {
+        if (estaVazia()) {
+            return;
+        }
+        T valor = pop();
+        inverterRecursivo();
+        push(valor);
+    }*/
+
+    // Metodo copia
+    public PilhaVetor<T> copia() {
+        PilhaVetor<T> pilhaCopia = new PilhaVetor<>(limite);
+        for (int i = 0; i < tamanho; i++) {
+            pilhaCopia.push((T) info[i]);
+        }
+        return pilhaCopia;
+    }
+
+    // Metodo pertence
+    public boolean pertence(T valor) {
+        for (int i = 0; i < tamanho; i++) {
+            if (info[i].equals(valor)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Metodo retorna o indice do elemento
+    public int indexOf(T valor) {
+        for (int i = tamanho - 1; i >= 0; i--) {
+            if (info[i].equals(valor)) {
+                return tamanho - 1 - i; // Índice relativo ao topo
+            }
+        }
+        return -1;
+    }
+
+    // Compara duas pilhas
+    public boolean isIgual(PilhaVetor<T> p) {
+        if (this.tamanho != p.tamanho) {
+            return false;
+        }
+        for (int i = 0; i < tamanho; i++) {
+            if (!info[i].equals(p.info[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Metodo para retornar uma nova pilha do topo ate a quantidade do parametro (de cima pra baixo)
+    //ex: se a pilha tem 5 elementos e o parametro é 3, retorna uma pilha com os 3 primeiros elementos (de cima pra baixo)
+    public PilhaVetor<T> subPilha(int n) {
+        if (n > tamanho) {
+            throw new IllegalArgumentException("Número de elementos maior que o tamanho da pilha");
+        }
+        PilhaVetor<T> subPilha = new PilhaVetor<>(n);
+        for (int i = tamanho - n; i < tamanho; i++) {
+            subPilha.push((T) info[i]);
+        }
+        return subPilha;
+    }
 
 }

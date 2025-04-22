@@ -7,12 +7,7 @@ public class TesteArvoreBi {
         // TESTE 1 – ÁRVORE COMPLETA
         // ======================
 
-        ArvoreBinaria<Integer> arvore = new ArvoreBinaria<Integer>();
-
-        // Verifica se a árvore está vazia antes de adicionar os nós
-        System.out.println("Está vazia antes de criar os nós e definir raiz:");
-        System.out.println(arvore.estaVazia());
-        System.out.println("");
+        ArvoreBinaria<Integer> arvore = new ArvoreBinaria<>();
 
         // Criação dos nós
         NoArvoreBinaria<Integer> no6 = new NoArvoreBinaria<>(6);
@@ -25,73 +20,68 @@ public class TesteArvoreBi {
         // Define a raiz da árvore
         arvore.setRaiz(no1);
 
-        // Verifica se a árvore ainda está vazia
-        System.out.println("Está vazia após criar os nós e definir raiz:");
-        System.out.println(arvore.estaVazia());
+        // Imprime a estrutura da árvore
+        System.out.println("------------------------------------------------------");
+        System.out.println("Estrutura da Árvore Completa:");
+        arvore.imprimirArvoreVisual();
         System.out.println("");
 
-        // Impressão da árvore em pré-ordem (estrutura com < >)
-        System.out.println("ToString:");
-        System.out.println(arvore.toString());
+        // ======================
+        // TESTES DOS NOVOS MÉTODOS
+        // ======================
+
+        // Teste: Verificar se a árvore é cheia
+        System.out.println("A árvore é cheia?");
+        System.out.println(arvore.isCheia());
         System.out.println("");
 
-        // Teste de pertencimento de elementos
-        System.out.println("Pertence 1:");
-        System.out.println(arvore.pertence(1));
+        // Teste: Verificar se a árvore é balanceada
+        System.out.println("A árvore é balanceada?");
+        System.out.println(arvore.isBalanceada());
         System.out.println("");
 
-        System.out.println("Pertence 3:");
-        System.out.println(arvore.pertence(3));
+        // Teste: Verificar se a árvore é completa
+        System.out.println("A árvore é completa?");
+        System.out.println(arvore.isCompleta());
         System.out.println("");
 
-        System.out.println("Pertence 6:");
-        System.out.println(arvore.pertence(6));
+        // Teste: Caminho até um nó específico
+        System.out.println("Caminho até o nó 6:");
+        System.out.println(arvore.verificaAteUmNo(6));
         System.out.println("");
 
-        System.out.println("Pertence 10:");
-        System.out.println(arvore.pertence(10));
+        System.out.println("Caminho até o nó 4:");
+        System.out.println(arvore.verificaAteUmNo(4));
         System.out.println("");
 
-        // Contagem de nós
-        System.out.println("Número nós:");
-        System.out.println(arvore.contarNos());
+        // Teste: Altura de um nó específico
+        System.out.println("Altura do nó 3:");
+        System.out.println(arvore.alturaDoNo(3));
         System.out.println("");
 
-        // Verifica se a árvore é degenerada
-        System.out.println("A árvore é degenerada?");
-        System.out.println(arvore.isDegenerada());
+        System.out.println("Altura do nó 2:");
+        System.out.println(arvore.alturaDoNo(2));
         System.out.println("");
 
-        // Número de folhas
-        System.out.println("Número de folhas:");
-        System.out.println(arvore.contarFolhas());
-        System.out.println("");
-
-        // Altura da árvore
-        System.out.println("Altura da árvore:");
-        System.out.println(arvore.contarAltura());
-        System.out.println("");
-
-        // Nós internos
+        // Teste: Contar o número de nós internos
         System.out.println("Número de nós internos:");
         System.out.println(arvore.contarNosInternos());
         System.out.println("");
 
-        // Nós com filhos
+        // Teste: Contar o número de folhas
+        System.out.println("Número de folhas:");
+        System.out.println(arvore.contarFolhas());
+        System.out.println("");
+
+        // Teste: Contar o número de nós em um nível específico
+        System.out.println("Número de nós no nível 2:");
+        System.out.println(arvore.contarNosNivel(2));
+        System.out.println("");
+
+        // Teste: Contar o número de nós com pelo menos um filho
         System.out.println("Número de nós com pelo menos um filho:");
         System.out.println(arvore.contarNosComFilhos());
         System.out.println("");
-
-        // Impressão simples (in-order)
-        System.out.println("In-order simples (toStringSimples):");
-        System.out.println(arvore.toStringSimples());
-        System.out.println("");
-
-        // Impressão pós-ordem simples
-        System.out.println("Pós-ordem simples (toStringSimplesPos):");
-        System.out.println(arvore.toStringSimplesPos());
-        System.out.println("");
-
 
         // ======================
         // TESTE 2 – ÁRVORE DEGENERADA
@@ -106,20 +96,22 @@ public class TesteArvoreBi {
 
         arvoreDeg.setRaiz(d1);
 
-        // Impressão da estrutura da árvore degenerada
-        System.out.println("Estrutura da árvore:");
-        System.out.println(arvoreDeg.toString());
+        // Imprime a estrutura da árvore
+        System.out.println("------------------------------------------------------");
+        System.out.println("Estrutura da Árvore Degenerada:");
+        arvoreDeg.imprimirArvoreVisual();
+        System.out.println("");
 
         // Verificação de degeneração
-        System.out.println("É degenerada?");
+        System.out.println("A árvore é degenerada?");
         System.out.println(arvoreDeg.isDegenerada());
-
+        System.out.println("");
 
         // ======================
-        // TESTE 3 – IMPRESSÕES VARIADAS (PÓS, SIMÉTRICA)
+        // TESTE 3 – ÁRVORE VARIADA
         // ======================
 
-        ArvoreBinaria<Integer> arvorePos = new ArvoreBinaria<>();
+        ArvoreBinaria<Integer> arvoreVar = new ArvoreBinaria<>();
 
         NoArvoreBinaria<Integer> n80 = new NoArvoreBinaria<>(80);
         NoArvoreBinaria<Integer> n10 = new NoArvoreBinaria<>(10, n80, null);
@@ -128,30 +120,37 @@ public class TesteArvoreBi {
         NoArvoreBinaria<Integer> n30 = new NoArvoreBinaria<>(30, null, null);
         NoArvoreBinaria<Integer> n70 = new NoArvoreBinaria<>(70, n30, n20);
 
-        arvorePos.setRaiz(n70);
+        arvoreVar.setRaiz(n70);
 
-        // Impressão em pré-ordem
-        System.out.println("Pré-ordem (toString):");
-        System.out.println(arvorePos.toString());
+        // Teste: Impressão em pré-ordem
+        System.out.println("Impressão em pré-ordem:");
+        System.out.println(arvoreVar.toString());
+        System.out.println("");
 
-        // Impressão em pós-ordem
-        System.out.println("Pós-ordem (arvorePos):");
-        System.out.println(arvorePos.arvorePos());
+        // Teste: Impressão em pós-ordem
+        System.out.println("Impressão em pós-ordem:");
+        System.out.println(arvoreVar.toStringPosOrdem());
+        System.out.println("");
 
-        // Impressão em ordem simétrica (in-order com < >)
-        System.out.println("Simétrica (arvoreSimetrica):");
-        System.out.println(arvorePos.arvoreSimetrica());
+        // Teste: Impressão em ordem simétrica
+        System.out.println("Impressão em ordem simétrica:");
+        System.out.println(arvoreVar.toStringSimetrico());
+        System.out.println("");
 
-        // Impressão simples in-order
-        System.out.println("In-order simples:");
-        System.out.println(arvorePos.toStringSimples());
+        // Teste: Visita em pré-ordem
+        System.out.println("Visita em pré-ordem:");
+        System.out.println(arvoreVar.visitaPreOrdem());
+        System.out.println("");
 
-        // Impressão simples pós-ordem
-        System.out.println("Pós-ordem simples:");
-        System.out.println(arvorePos.toStringSimplesPos());
+        // Teste: Visita em pós-ordem
+        System.out.println("Visita em pós-ordem:");
+        System.out.println(arvoreVar.visitaPosOrdem());
+        System.out.println("");
 
-        // ======================
-        // FIM DOS TESTES
-        // ======================
+        // Teste: Visita em ordem simétrica
+        System.out.println("Visita em ordem simétrica:");
+        System.out.println(arvoreVar.visitaSimetrica());
+        System.out.println("");
+        
     }
 }

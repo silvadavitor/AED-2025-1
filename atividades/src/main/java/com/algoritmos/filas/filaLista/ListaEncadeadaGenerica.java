@@ -4,13 +4,23 @@ package com.algoritmos.filas.filaLista;
 public class ListaEncadeadaGenerica<T> {
     private NoLista<T> primeiro;
     private NoLista<T> ultimo;
+    private int tamanho;
+
+    public int getTamanho() {
+        return tamanho;
+    }
     
     public ListaEncadeadaGenerica() {
         this.primeiro = null;
+        this.tamanho = 0; // Inicializa o tamanho como 0
     }
 
     public NoLista<T> getPrimeiro() {
         return primeiro;
+    }
+
+    public boolean estaVazia() {
+        return primeiro == null;
     }
 
     public void inserir(T valor) {
@@ -19,120 +29,52 @@ public class ListaEncadeadaGenerica<T> {
         novo.setInfo(valor);
         novo.setProximo(this.primeiro);
 
-        if (estaVazia()){
+        if (estaVazia()) {
             ultimo = novo;
+        } else {
+            ultimo.setProximo(novo);
         }
+        ultimo = novo;
 
         this.primeiro = novo;
-
+        tamanho++; // Incrementa o tamanho
     }
+
     public void inserirNoFinal(T valor) {
         NoLista<T> novo = new NoLista<T>();
 
         novo.setInfo(valor);
         novo.setProximo(null);
 
-        if (estaVazia()){
+        if (estaVazia()) {
             primeiro = novo;
-        }
-        else{
+        } else {
             ultimo.setProximo(novo);
         }
 
         ultimo = novo;
-
+        tamanho++; // Incrementa o tamanho
     }
 
-
-    public void exibir(){
-        NoLista<T> p = this.primeiro;
-
-        while (p != null){
-            System.out.println(p.getInfo());
-            p = p.getProximo(); // p = p.proximo
-        }
-    }
-
-    public boolean estaVazia(){
-        if (this.primeiro == null){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    public NoLista<T> buscar(T valor){
-        NoLista<T> p = this.primeiro;
-
-        while (p != null){
-            if (p.getInfo().equals(valor)) {
-                return p;
-            }
-            p = p.getProximo();
-        }
-        return null;
-    }
-
-    public void retirar(T valor){
+    public void retirar(T valor) {
         NoLista<T> p = this.primeiro;
         NoLista<T> anterior = null;
 
-        // procura nó que contém dado a ser removido,
-        // guardando o anterior
-        while (p != null && p.getInfo() != valor){
+        // Procura nó que contém o dado a ser removido, guardando o anterior
+        while (p != null && !p.getInfo().equals(valor)) {
             anterior = p;
             p = p.getProximo();
         }
 
-        // Se achou nó, retira-o da lista
-        if (p != null){
-            if (p == this.primeiro){
+        // Se achou o nó, retira-o da lista
+        if (p != null) {
+            if (p == this.primeiro) {
                 this.primeiro = p.getProximo();
-            }
-            else{
+            } else {
                 anterior.setProximo(p.getProximo());
             }
+            tamanho--; // Decrementa o tamanho
         }
-    }
-
-
-    public int obterComprimento(){
-        NoLista<T> p = this.primeiro;
-
-        int cont = 0;
-        while (p != null){
-            cont++;
-            p = p.getProximo();
-        }
-        return cont;
-    }
-    
-    public NoLista<T> obterNo(int idx){
-        
-
-        if (idx < 0) {
-            throw new IndexOutOfBoundsException("Fora dos limites.");
-        }
-        NoLista<T> p = getPrimeiro();
-        while (p != null && 0 < idx ){
-            idx--;
-            p = p.getProximo();
-        }
-        if (p == null) {
-            throw new IndexOutOfBoundsException("Fora dos limites.");
-        }
-        return p;
-    }
-    
-    public String toString(){
-        String string = "";
-        NoLista<T> p = this.primeiro;
-        while (p != null){
-            string = string + p.getInfo() + ",";
-            p = p.getProximo();
-        }
-        return string;
     }
 
     public ListaEncadeadaGenerica<T> criarInvertida(){
@@ -144,6 +86,24 @@ public class ListaEncadeadaGenerica<T> {
             p = p.getProximo();
         }
         return invertida;
+    }
+
+    // ==========================
+    // METODOS NOVOS
+    // ==========================    
+
+    // Metodo para pegar os elementos
+    public T getElemento(int index) {
+        if (index < 0 || index >= getTamanho()) {
+            throw new IndexOutOfBoundsException("Índice fora dos limites: " + index);
+        }
+
+        NoLista<T> atual = getPrimeiro();
+        for (int i = 0; i < index; i++) {
+            atual = atual.getProximo();
+        }
+
+        return atual.getInfo();
     }
 
 //     public void anexar(ListaGenerica<T> l2) {
@@ -174,4 +134,5 @@ public class ListaEncadeadaGenerica<T> {
     
 // }
 }
+
 

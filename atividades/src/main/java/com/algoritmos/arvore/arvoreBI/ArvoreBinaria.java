@@ -1,5 +1,7 @@
 package com.algoritmos.arvore.arvoreBI;
 
+import java.util.Arrays;
+
 public class ArvoreBinaria<T> {
     private NoArvoreBinaria<T> raiz;
 
@@ -32,7 +34,7 @@ public class ArvoreBinaria<T> {
         }
     }
 
-    // Impressão pré-ordem (estrutura com < >)
+    // Impressão pré-ordem (estrutura com < >) ---------- PRE ORDEM
     public String toString() {
         return arvorePre(raiz);
     }
@@ -44,20 +46,67 @@ public class ArvoreBinaria<T> {
         return "<" + no.getInfo() + arvorePre(no.getEsquerda()) + arvorePre(no.getDireita()) + ">";
     }
 
-    // Impressão pós-ordem (estrutura com < >)
-    public String arvorePos() {
-        return arvorePos(raiz);
+    // ==========================
+    // METODOS NOVOS
+    // ==========================
+    
+    // Metodo pra imprimir a arvore de forma visual hierarquica
+    public void imprimirArvoreVisual() {
+        if (raiz == null) {
+            System.out.println("Árvore vazia.");
+            return;
+        }
+        int h = contarAltura(raiz) + 1;
+        int rows = 2 * h - 1;
+        int cols = (1 << (h + 1)) - 1;
+    
+        char[][] grid = new char[rows][cols];
+        for (int i = 0; i < rows; i++)
+            Arrays.fill(grid[i], ' ');
+    
+        colocarNo(grid, raiz, 0, 0, cols - 1);
+    
+        for (char[] linha : grid) {
+            System.out.println(new String(linha));
+        }
+    }
+    
+    private void colocarNo(char[][] grid, NoArvoreBinaria<T> no, int level, int l, int r) {
+        if (no == null) return;
+        int rowNode = level * 2;
+        int mid = (l + r) / 2;
+    
+        String s = no.getInfo().toString();
+        grid[rowNode][mid] = s.charAt(0);
+    
+        if (no.getEsquerda() != null) {
+            int ml = (l + mid) / 2;
+            grid[rowNode + 1][ml] = '/';
+            colocarNo(grid, no.getEsquerda(), level + 1, l, mid - 1);
+        }
+        if (no.getDireita() != null) {
+            int mr = (mid + 1 + r) / 2;
+            grid[rowNode + 1][mr] = '\\';
+            colocarNo(grid, no.getDireita(), level + 1, mid + 1, r);
+        }
     }
 
-    private String arvorePos(NoArvoreBinaria<T> no) {
+    // IMPRESSOES (estrutura com < >) --------------------------------------------------------------------------------
+
+    // Impressao em pos ordem ---------- POS ORDEM
+    public String toStringPosOrdem() {
+        return arvorePosOrdem(raiz);
+    }
+
+    private String arvorePosOrdem(NoArvoreBinaria<T> no) {
         if (no == null) {
             return "<>";
         }
-        return "<" + arvorePos(no.getEsquerda()) + arvorePos(no.getDireita()) + no.getInfo() + ">";
-    }
-
-    // Impressão simétrica (estrutura com < >)
-    public String arvoreSimetrica() {
+        return "<" + arvorePosOrdem(no.getEsquerda()) + arvorePosOrdem(no.getDireita()) + no.getInfo() + ">";
+    }    
+    
+    // Impressao simétrica ---------- SIMETRICA
+    public String toStringSimetrico() {
         return arvoreSimetrica(raiz);
     }
 
@@ -67,38 +116,47 @@ public class ArvoreBinaria<T> {
         }
         return "<" + arvoreSimetrica(no.getEsquerda()) + no.getInfo() + arvoreSimetrica(no.getDireita()) + ">";
     }
+        
 
-    // Impressão simétrica simples (ex: 30,70,80)
-    public String toStringSimples() {
-        return toStringSimples(raiz).replaceAll(",$", "");
+    // VISITAS COM VIRGULAS --------------------------------------------------------------------------------
+
+    // visita em pre ordem (com vírgulas) ---------- PRE ORDEM
+    public String visitaPreOrdem() {
+        return visitaPreOrdem(raiz);
     }
 
-    private String toStringSimples(NoArvoreBinaria<T> no) {
-        if (no == null) return "";
-        return toStringSimples(no.getEsquerda()) + no.getInfo() + "," + toStringSimples(no.getDireita());
-    }
-
-    // Impressão pós-ordem simples (ex: 80,10,25,20,70)
-    public String toStringSimplesPos() {
-        return toStringSimplesPos(raiz).replaceAll(",$", "");
-    }
-
-    private String toStringSimplesPos(NoArvoreBinaria<T> no) {
-        if (no == null) return "";
-        return toStringSimplesPos(no.getEsquerda()) + toStringSimplesPos(no.getDireita()) + no.getInfo() + ",";
-    }
-
-    // Visita em ordem simétrica (com vírgulas)
-    public String toStringSimplesSimetrico() {
-        return visitarOrdemSimetrica(raiz);
-    }
-
-    private String visitarOrdemSimetrica(NoArvoreBinaria<T> no) {
-        if (no != null) {
-            return visitarOrdemSimetrica(no.getEsquerda()) + no.getInfo() + "," + visitarOrdemSimetrica(no.getDireita());
+    private String visitaPreOrdem(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "";
         }
-        return "";
+        return no.getInfo() + "," + visitaPreOrdem(no.getEsquerda()) + visitaPreOrdem(no.getDireita());
     }
+
+    // visita em pos ordem (com vírgulas) ---------- POS ORDEM
+    public String visitaPosOrdem() {
+        return visitaPosOrdem(raiz);
+    }
+
+    private String visitaPosOrdem(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "";
+        }
+        return visitaPosOrdem(no.getEsquerda()) + visitaPosOrdem(no.getDireita()) + no.getInfo() + ",";
+    }
+
+    // visita simétrica (com vírgulas) ---------- SIMETRICA
+    public String visitaSimetrica() {
+        return visitaSimetrica(raiz);
+    }
+
+    private String visitaSimetrica(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return "";
+        }
+        return visitaSimetrica(no.getEsquerda()) + no.getInfo() + "," + visitaSimetrica(no.getDireita());
+    }
+
+    // CONTAGENS --------------------------------------------------------------------------------
 
     // Conta todos os nós da árvore
     public int contarNos() {
@@ -150,6 +208,38 @@ public class ArvoreBinaria<T> {
         return contarNosComFilhos(no.getEsquerda()) + contarNosComFilhos(no.getDireita());
     }
 
+    // Conta o número de nós internos (nós que não são folhas).
+    public int contarNosInternos() {
+         return contarNosInternos(raiz);
+     }
+
+    private int contarNosInternos(NoArvoreBinaria<T> no) {
+         if (no == null) {
+             return 0;
+         }
+         if (no.getEsquerda() == null && no.getDireita() == null) {
+             return 0;
+         }
+         return 1 + contarNosInternos(no.getEsquerda()) + contarNosInternos(no.getDireita());
+     }    
+
+    // Conta o número de nós em um determinado nível da árvore.
+    public int contarNosNivel(int nivel) {
+        return contarNosNivel(raiz, nivel, 0);
+    }
+
+    private int contarNosNivel(NoArvoreBinaria<T> no, int nivel, int nivelAtual) {
+        if (no == null) {
+            return 0;
+        }
+        if (nivelAtual == nivel) {
+            return 1;
+        }
+        return contarNosNivel(no.getEsquerda(), nivel, nivelAtual + 1) + contarNosNivel(no.getDireita(), nivel, nivelAtual + 1);
+    }
+
+    // METODOS AUXILIARES --------------------------------------------------------------------------------    
+
     // Verifica se a árvore é degenerada
     public boolean isDegenerada() {
         return isDegenerada(raiz);
@@ -161,78 +251,89 @@ public class ArvoreBinaria<T> {
         return isDegenerada(no.getEsquerda()) && isDegenerada(no.getDireita());
     }
 
-    // Alternativo para verificação de árvore degenerada
-    public boolean eDegenerada() {
-        return eDegenerada(raiz);
+    // Retorna a altura do no passado
+    public int alturaDoNo(T valor) {
+        return alturaDoNo(raiz, valor);
     }
-
-    private boolean eDegenerada(NoArvoreBinaria<T> no) {
-        if (no == null) return true;
-        if (no.getEsquerda() == null && no.getDireita() == null) return true;
-        if (no.getEsquerda() != null && no.getDireita() != null) return false;
-        return eDegenerada(no.getEsquerda()) && eDegenerada(no.getDireita());
-    }
-
-    // Conta nós internos a partir da raiz
-    public int contarNosInternos() {
-        if (raiz.getInfo() != null || raiz.getEsquerda() != null || raiz.getDireita() != null) {
-            return 1 + contarNosInternos(raiz.getEsquerda()) + contarNosInternos(raiz.getDireita());
-        }
-        return 0;
-    }
-
-    // Conta nós internos a partir de um nó qualquer
-    public int contarNosInternos(NoArvoreBinaria<T> no) {
-        if (no.getInfo() != null || no.getEsquerda() != null || no.getDireita() != null) {
-            return 1 + contarNosInternos(no.getEsquerda()) + contarNosInternos(no.getDireita());
-        }
-        return 0;
-    }
-
     
-    // ------------------------------
-    // MÉTODOS COMENTADOS (NÃO ALTERADOS)
-    // ------------------------------
+    private int alturaDoNo(NoArvoreBinaria<T> no, T valor) {
+        if (no == null) {
+            return -1;
+        }
+        if (no.getInfo().equals(valor)) {
+            return contarAltura(no);
+        }
+        int alturaEsquerda = alturaDoNo(no.getEsquerda(), valor);
+        if (alturaEsquerda != -1) {
+            return alturaEsquerda;
+        }
+        return alturaDoNo(no.getDireita(), valor);
+    }
 
-    // // Conta o número de nós na árvore binária.
-    // public int contarNos() {
-    //     return contarNos(raiz);
-    // }
+    //Uma árvore binária cheia é aquela em que todos os nós têm 0 ou 2 filhos
+    public boolean isCheia() {
+        return isCheia(raiz);
+    }
+    
+    private boolean isCheia(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return true;
+        }
+        if ((no.getEsquerda() == null && no.getDireita() != null) || 
+            (no.getEsquerda() != null && no.getDireita() == null)) {
+            return false;
+        }
+        return isCheia(no.getEsquerda()) && isCheia(no.getDireita());
+    }
 
-    // private int contarNos(NoArvoreBinaria<T> no) {
-    //     if (no == null) {
-    //         return 0;
-    //     }
-    //     return 1 + contarNos(no.getEsq()) + contarNos(no.getDir());
-    // }
+    // Verifica se a árvore é balanceada (diferença de altura entre subárvores não pode ser maior que 1)
+    public boolean isBalanceada() {
+        return isBalanceada(raiz) != -1;
+    }
 
-    // // Conta o número de folhas (nós sem filhos).
-    // public int contarFolhas() {
-    //     return contarFolhas(raiz);
-    // }
+    private int isBalanceada(NoArvoreBinaria<T> no) {
+        if (no == null) {
+            return 0;
+        }
+        int alturaEsquerda = isBalanceada(no.getEsquerda());
+        int alturaDireita = isBalanceada(no.getDireita());
+        if (alturaEsquerda == -1 || alturaDireita == -1 || Math.abs(alturaEsquerda - alturaDireita) > 1) {
+            return -1;
+        }
+        return Math.max(alturaEsquerda, alturaDireita) + 1;
+    }
 
-    // private int contarFolhas(NoArvoreBinaria<T> no) {
-    //     if (no == null) {
-    //         return 0;
-    //     }
-    //     if (no.getEsq() == null && no.getDir() == null) {
-    //         return 1;
-    //     }
-    //     return contarFolhas(no.getEsq()) + contarFolhas(no.getDir());
-    // }
+    // Verifica se a árvore é completa (todos os níveis, exceto possivelmente o último, estão completamente preenchidos)
+    public boolean isCompleta() {
+        return isCompleta(raiz, 0, contarNos());
+    }
 
-    // // Conta o número de nós internos (nós que não são folhas).
-    // public int contarNosInternos() {
-    //     return contarNosInternos(raiz);
-    // }
+    private boolean isCompleta(NoArvoreBinaria<T> no, int indice, int totalNos) {
+        if (no == null) {
+            return true;
+        }
+        if (indice >= totalNos) {
+            return false;
+        }
+        return isCompleta(no.getEsquerda(), 2 * indice + 1, totalNos) && isCompleta(no.getDireita(), 2 * indice + 2, totalNos);
+    }
 
-    // private int contarNosInternos(NoArvoreBinaria<T> no) {
-    //     if (no == null) {
-    //         return 0;
-    //     }
-    //     if (no.getEsq() == null && no.getDir() == null) {
-    //         return 0;
-    //     }
-    //     return 1 + contarNosInternos(no.getEsq()) + contarNosInternos(no.getDir());
-    // }
+    // Caminha ate um nó específico e retorna o caminho percorrido.
+    public String verificaAteUmNo(T valor) {
+        return verificaAteUmNo(raiz, valor, "");
+    }
+    
+    private String verificaAteUmNo(NoArvoreBinaria<T> no, T valor, String caminho) {
+        if (no == null) {
+            return "";
+        }
+        if (no.getInfo().equals(valor)) {
+            return caminho + no.getInfo();
+        }
+        String caminhoEsquerda = verificaAteUmNo(no.getEsquerda(), valor, caminho + no.getInfo() + " -> ");
+        if (!caminhoEsquerda.isEmpty()) {
+            return caminhoEsquerda;
+        }
+        return verificaAteUmNo(no.getDireita(), valor, caminho + no.getInfo() + " -> ");
+    }
 }
