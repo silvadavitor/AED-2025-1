@@ -210,7 +210,7 @@ public class FilaVetor<T> implements Fila<T> {
     }
 
     // Concatena duas filas, ordenando os ELEMENTOS de acordo com o Comparator fornecido
-    // Exemplo: Fila1: 1,3,5 e Fila2: 2,4,6 -> Resultado: 1,2,3,4,5,6
+    // Exemplo: Fila1: 1,3,5 e Fila2: 8,4,6 -> Resultado: 1,8,3,4,5,6
     public FilaVetor<T> ordenadoConcatenando(FilaVetor<T> outra, Comparator<T> comparator) {
         FilaVetor<T> resultado = new FilaVetor<>(this.tamanho + outra.tamanho);
 
@@ -256,7 +256,7 @@ public class FilaVetor<T> implements Fila<T> {
         return fila;
     }
 
-    // Encolhe o vetor para o tamanho exato da fila atual
+    // // Encolhe o vetor para o tamanho exato da fila atual usando metodo inserir
     public void encolher() {
         FilaVetor<T> novaFila = new FilaVetor<>(tamanho);
         int index = inicio;
@@ -272,14 +272,12 @@ public class FilaVetor<T> implements Fila<T> {
         inicio = 0;
     }
 
-    // OUTRO EXEMPLO DE ENCOLHER (comentado)
+    // OUTRO EXEMPLO DE ENCOLHER SE NÃO PODER USAR O METODO INSERIR     <----- EX ALANA 
     // public void encolher() {
-    //     T[] novo = (T[]) new Object[tamanho];
-    //     int posicao = inicio;
+    //     T[] novo = (T[]) new Object[this.tamanho];
 
     //     for (int i = 0; i < tamanho; i++) {
-    //         novo[i] = info[posicao];
-    //         posicao = (posicao + 1) % limite;
+    //         novo[i] = info[(inicio + i) % limite];
     //     }
     //     this.inicio = 0;
     //     this.info = novo;

@@ -147,16 +147,23 @@ public class FilaVetorTest {
     
     @Test
     public void testEncolher() {
-        FilaVetor<Integer> fila = new FilaVetor<>(10);
-        fila.inserir(1);
-        fila.inserir(2);
-        fila.inserir(3);
+        FilaVetor<String> fila = new FilaVetor<>(10);
+        fila.inserir("TESTE");
+        fila.inserir("TESTE");
+        fila.inserir("TESTE");
+        fila.inserir("A");
+        fila.inserir("B");
+        fila.inserir("C");
+        fila.inserir("D");
+        fila.retirar();
+        fila.retirar();
+        fila.retirar();
         System.out.println("---------------------------------------------------");
         System.out.println("Antes de encolher: Limite = " + fila.getLimite() + ", Fila = " + fila.toString());
         fila.encolher();
         System.out.println("Depois de encolher: Limite = " + fila.getLimite() + ", Fila = " + fila.toString());
-        assertEquals(3, fila.getLimite());
-        assertEquals("1,2,3", fila.toString());
+        assertEquals(4, fila.getLimite());
+        assertEquals("A,B,C,D", fila.toString());
     }
 
     @Test
@@ -196,7 +203,7 @@ public class FilaVetorTest {
         System.out.println("Fila original: " + fila.toString());
         PilhaVetor<Integer> pilha = fila.empilhar(fila);
         System.out.println("Pilha gerada: " + pilha.toString());
-        assertEquals("[3, 2, 1]", pilha.toString());
+        assertEquals("3,2,1", pilha.toString());
     }
 
     @Test
