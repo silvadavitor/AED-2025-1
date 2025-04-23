@@ -169,6 +169,12 @@ public class ArvoreBinaria<T> {
     }
 
     // Contar somente os nós folha, a partir de um nó qualquer (sa) <--- Ex alana
+    // Se for utilizar lembra de alterar os testes para validação, pois nesse ele recebe um parametro
+
+    // public int contarFolhas(NoArvoreBinaria<T> sa) {
+    //     return contarFolhas(sa);
+    // }
+
     // public int contarFolhas(NoArvoreBinaria<T> sa){
     //     if (sa == null){
     //         return 0;
@@ -179,6 +185,7 @@ public class ArvoreBinaria<T> {
     //     return contarFolhas(sa.getEsquerda()) + contarFolhas(sa.getDireita());
         
     // }
+
 
     // Conta o número de folhas (nós sem filhos), a partir da raiz
     public int contarFolhas() {
