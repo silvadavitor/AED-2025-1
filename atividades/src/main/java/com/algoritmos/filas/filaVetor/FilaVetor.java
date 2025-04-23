@@ -272,7 +272,7 @@ public class FilaVetor<T> implements Fila<T> {
         inicio = 0;
     }
 
-    // OUTRO EXEMPLO DE ENCOLHER SE NÃO PODER USAR O METODO INSERIR     <----- EX ALANA 
+    // OUTRO EXEMPLO DE ENCOLHER SE NÃO PODER USAR O !!! METODO INSERIR !!!     <----- EX ALANA 
     // public void encolher() {
     //     T[] novo = (T[]) new Object[this.tamanho];
 
