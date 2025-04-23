@@ -151,6 +151,35 @@ public class TesteArvoreBi {
         System.out.println("Visita em ordem simétrica:");
         System.out.println(arvoreVar.visitaSimetrica());
         System.out.println("");
+
+        // ======================
+        // TESTE 4 – ÁRVORE DEGENERADA COMPLEXA
+        // ======================
+
+        System.out.println("\nCriando uma árvore degenerada mais complexa:");
+        ArvoreBinaria<Integer> arvoreDeg2 = new ArvoreBinaria<>();
+
+        NoArvoreBinaria<Integer> dc6 = new NoArvoreBinaria<>(6);
+        NoArvoreBinaria<Integer> dc5 = new NoArvoreBinaria<>(5, dc6, null);
+        NoArvoreBinaria<Integer> dc4 = new NoArvoreBinaria<>(4, null, dc5);
+        NoArvoreBinaria<Integer> dc3 = new NoArvoreBinaria<>(3, null, dc4);
+        NoArvoreBinaria<Integer> dc2 = new NoArvoreBinaria<>(2, null, dc3);
+        NoArvoreBinaria<Integer> dc1 = new NoArvoreBinaria<>(1, dc2, null);
+
+        arvoreDeg2.setRaiz(dc1);
+
+        // Imprime a estrutura da árvore
+        System.out.println("------------------------------------------------------");
+        System.out.println("Estrutura da Árvore Degenerada Complexa:");
+        arvoreDeg2.imprimirArvoreVisual();
+        System.out.println("");
+
+        // Verificação de degeneração
+        System.out.println("A árvore é degenerada?");
+        System.out.println(arvoreDeg2.isDegenerada());
+        System.out.println("");
         
     }
+
+    
 }
