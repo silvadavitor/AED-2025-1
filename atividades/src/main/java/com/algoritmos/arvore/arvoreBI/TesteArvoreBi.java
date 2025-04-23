@@ -179,7 +179,79 @@ public class TesteArvoreBi {
         System.out.println(arvoreDeg2.isDegenerada());
         System.out.println("");
         
+
+
+
+
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 1 – Árvore Vazia:");
+    ArvoreBinaria<Integer> arvoreVazia = new ArvoreBinaria<>();
+    System.out.println("Esperado: false");
+    System.out.println("Resultado: " + arvoreVazia.isDegenerada());
+    System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 2 – Árvore com um único nó:");
+    ArvoreBinaria<Integer> arvoreUnica = new ArvoreBinaria<>();
+    arvoreUnica.setRaiz(new NoArvoreBinaria<>(1));
+    System.out.println("Esperado: false");
+    System.out.println("Resultado: " + arvoreUnica.isDegenerada());
+    System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 3 – Árvore Degenerada (linha reta à direita):");
+    ArvoreBinaria<Integer> arvoreDegenerada = new ArvoreBinaria<>();
+    NoArvoreBinaria<Integer> K3 = new NoArvoreBinaria<>(3);
+    NoArvoreBinaria<Integer> K2 = new NoArvoreBinaria<>(2, null, K3);
+    NoArvoreBinaria<Integer> K1 = new NoArvoreBinaria<>(1, null, K2);
+    arvoreDegenerada.setRaiz(K1);
+    System.out.println("Esperado: true");
+    System.out.println("Resultado: " + arvoreDegenerada.isDegenerada());
+    System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 4 – Árvore Degenerada (linha reta à esquerda):");
+    ArvoreBinaria<Integer> arvoreDegenerada2 = new ArvoreBinaria<>();
+    NoArvoreBinaria<Integer> e3 = new NoArvoreBinaria<>(3);
+    NoArvoreBinaria<Integer> e2 = new NoArvoreBinaria<>(2, e3, null);
+    NoArvoreBinaria<Integer> e1 = new NoArvoreBinaria<>(1, e2, null);
+    arvoreDegenerada2.setRaiz(e1);
+    System.out.println("Esperado: true");
+    System.out.println("Resultado: " + arvoreDegenerada2.isDegenerada());
+    System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 5 – Árvore com dois filhos (não degenerada):");
+    ArvoreBinaria<Integer> arvoreNaoDeg = new ArvoreBinaria<>();
+    NoArvoreBinaria<Integer> f1 = new NoArvoreBinaria<>(8);
+    NoArvoreBinaria<Integer> f2 = new NoArvoreBinaria<>(9);
+    NoArvoreBinaria<Integer> quebra = new NoArvoreBinaria<>(7, f1, f2); // <-- dois filhos!
+    NoArvoreBinaria<Integer> raiz = new NoArvoreBinaria<>(5, quebra, null);
+    arvoreNaoDeg.setRaiz(raiz);
+    System.out.println("Esperado: false");
+    System.out.println("Resultado: " + arvoreNaoDeg.isDegenerada());
+    System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 6 – Árvore Degenerada Intercalada:");
+    ArvoreBinaria<Integer> arvoreIntercalada = new ArvoreBinaria<>();
+    
+    NoArvoreBinaria<Integer> J4 = new NoArvoreBinaria<>(4);
+    NoArvoreBinaria<Integer> J3 = new NoArvoreBinaria<>(3, null, J4);
+    NoArvoreBinaria<Integer> J2 = new NoArvoreBinaria<>(2, J3, null);
+    NoArvoreBinaria<Integer> J1 = new NoArvoreBinaria<>(1, null, J2);
+    
+    arvoreIntercalada.setRaiz(J1);
+    
+    System.out.println("Estrutura da Árvore Degenerada Intercalada:");
+    arvoreIntercalada.imprimirArvoreVisual();
+    System.out.println("Esperado: true");
+    System.out.println("Resultado: " + arvoreIntercalada.isDegenerada());
+    System.out.println("");
+    
     }
 
+    
     
 }
