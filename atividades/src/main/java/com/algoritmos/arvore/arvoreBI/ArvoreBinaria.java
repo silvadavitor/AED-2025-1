@@ -49,7 +49,6 @@ public class ArvoreBinaria<T> {
     // ==========================
     // METODOS NOVOS
     // ==========================
-    
     // Metodo pra imprimir a arvore de forma visual hierarquica
     public void imprimirArvoreVisual() {
         if (raiz == null) {

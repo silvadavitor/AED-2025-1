@@ -195,6 +195,7 @@ public class TesteArvoreBi {
     System.out.println("TESTE 2 – Árvore com um único nó:");
     ArvoreBinaria<Integer> arvoreUnica = new ArvoreBinaria<>();
     arvoreUnica.setRaiz(new NoArvoreBinaria<>(1));
+    arvoreUnica.imprimirArvoreVisual();
     System.out.println("Esperado: false");
     System.out.println("Resultado: " + arvoreUnica.isDegenerada());
     System.out.println("");
@@ -206,6 +207,7 @@ public class TesteArvoreBi {
     NoArvoreBinaria<Integer> K2 = new NoArvoreBinaria<>(2, null, K3);
     NoArvoreBinaria<Integer> K1 = new NoArvoreBinaria<>(1, null, K2);
     arvoreDegenerada.setRaiz(K1);
+    arvoreDegenerada.imprimirArvoreVisual();
     System.out.println("Esperado: true");
     System.out.println("Resultado: " + arvoreDegenerada.isDegenerada());
     System.out.println("");
@@ -217,6 +219,7 @@ public class TesteArvoreBi {
     NoArvoreBinaria<Integer> e2 = new NoArvoreBinaria<>(2, e3, null);
     NoArvoreBinaria<Integer> e1 = new NoArvoreBinaria<>(1, e2, null);
     arvoreDegenerada2.setRaiz(e1);
+    arvoreDegenerada2.imprimirArvoreVisual();
     System.out.println("Esperado: true");
     System.out.println("Resultado: " + arvoreDegenerada2.isDegenerada());
     System.out.println("");
@@ -229,6 +232,7 @@ public class TesteArvoreBi {
     NoArvoreBinaria<Integer> quebra = new NoArvoreBinaria<>(7, f1, f2); // <-- dois filhos!
     NoArvoreBinaria<Integer> raiz = new NoArvoreBinaria<>(5, quebra, null);
     arvoreNaoDeg.setRaiz(raiz);
+    arvoreNaoDeg.imprimirArvoreVisual();
     System.out.println("Esperado: false");
     System.out.println("Resultado: " + arvoreNaoDeg.isDegenerada());
     System.out.println("");
