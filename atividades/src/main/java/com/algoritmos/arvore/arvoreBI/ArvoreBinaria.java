@@ -260,38 +260,38 @@ public class ArvoreBinaria<T> {
     // METODOS AUXILIARES --------------------------------------------------------------------------------    
 
     // Verifica se a árvore é degenerada RETORNANDO DEGENERADA PARA ARVORE VAZIA E COM 1 NÓ
-    public boolean isDegenerada() {
-        return isDegenerada(raiz);
-    }
-
-    private boolean isDegenerada(NoArvoreBinaria<T> no) {
-        if (no == null) return true;
-        if (no.getEsquerda() != null && no.getDireita() != null) return false;
-        return isDegenerada(no.getEsquerda()) && isDegenerada(no.getDireita());
-    }
-
-    // Verifica se a árvore é degenerada RETORNANDO !!NÃO!! DEGENERADA PARA ARVORE VAZIA E COM 1 NÓ
-
     // public boolean isDegenerada() {
-    //     // Regra do enunciado: árvores vazias ou com um único nó não são degeneradas
-    //     if (raiz == null) return false;
-    //     if (raiz.getEsquerda() == null && raiz.getDireita() == null) return false;
     //     return isDegenerada(raiz);
     // }
 
     // private boolean isDegenerada(NoArvoreBinaria<T> no) {
     //     if (no == null) return true;
-
-    //     if (no.getEsquerda() != null && no.getDireita() != null) {
-    //         return false;
-    //     }
-
-    //     if (no.getEsquerda() != null) {
-    //         return isDegenerada(no.getEsquerda());
-    //     } else {
-    //         return isDegenerada(no.getDireita());
-    //     }
+    //     if (no.getEsquerda() != null && no.getDireita() != null) return false;
+    //     return isDegenerada(no.getEsquerda()) && isDegenerada(no.getDireita());
     // }
+
+    // Verifica se a árvore é degenerada RETORNANDO !!NÃO!! DEGENERADA PARA ARVORE VAZIA E COM 1 NÓ
+
+    public boolean isDegenerada() {
+        // Regra do enunciado: árvores vazias ou com um único nó não são degeneradas
+        if (raiz == null) return false;
+        if (raiz.getEsquerda() == null && raiz.getDireita() == null) return false;
+        return isDegenerada(raiz);
+    }
+
+    private boolean isDegenerada(NoArvoreBinaria<T> no) {
+        if (no == null) return true;
+
+        if (no.getEsquerda() != null && no.getDireita() != null) {
+            return false;
+        }
+
+        if (no.getEsquerda() != null) {
+            return isDegenerada(no.getEsquerda());
+        } else {
+            return isDegenerada(no.getDireita());
+        }
+    }
 
 
     // Retorna a altura do no passado
