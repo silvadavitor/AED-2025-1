@@ -172,5 +172,35 @@ public class TesteArvore {
         System.out.println("Caminho até o nó 5:");
         System.out.println(arvoreDegenerada.verificaAteUmNo(5)); // 1 -> 2 -> 3 -> 4 -> 5
         System.out.println("");
+
+        System.out.println("------------------------------------------------------");
+        System.out.println("TESTE  – Contar Folhas em Árvore N-ária:");
+        Arvore<String> arvoreNA = new Arvore<>();
+
+        NoArvore<String> noA = new NoArvore<>("A");
+        NoArvore<String> noB = new NoArvore<>("B");
+        NoArvore<String> noC = new NoArvore<>("C");
+        NoArvore<String> noD = new NoArvore<>("D");
+        NoArvore<String> noE = new NoArvore<>("E");
+
+        // Monta os filhos da raiz A
+        noA.setPrimeiro(noB);     // B é o primeiro filho
+        noB.setProximo(noC);      // C é irmão à direita de B
+        noC.setProximo(noD);      // D é irmão à direita de C
+
+        // C tem um filho E
+        noC.setPrimeiro(noE);
+
+        arvoreNA.setRaiz(noA);
+
+        // Impressão visual da árvore
+        System.out.println("Estrutura da Árvore N-ária:");
+        arvoreNA.imprimirArvoreVisual();
+
+        int folhas = arvoreNA.contarFolhas();
+        System.out.println("Esperado (3 folhas: B, D, E): 3");
+        System.out.println("Resultado: " + folhas);
+        System.out.println("");
+
     }
 }

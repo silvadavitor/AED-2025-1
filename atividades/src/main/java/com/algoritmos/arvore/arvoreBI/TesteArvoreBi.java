@@ -253,6 +253,49 @@ public class TesteArvoreBi {
     System.out.println("Esperado: true");
     System.out.println("Resultado: " + arvoreIntercalada.isDegenerada());
     System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 7 – Contar Folhas em Árvore Degenerada Intercalada:");
+    ArvoreBinaria<Integer> arvoreI = new ArvoreBinaria<>();
+
+    NoArvoreBinaria<Integer> L4 = new NoArvoreBinaria<>(4); // folha
+    NoArvoreBinaria<Integer> L3 = new NoArvoreBinaria<>(3, null, L4);
+    NoArvoreBinaria<Integer> L2 = new NoArvoreBinaria<>(2, L3, null);
+    NoArvoreBinaria<Integer> L1 = new NoArvoreBinaria<>(1, null, L2);
+
+    arvoreI.setRaiz(L1);
+
+    System.out.println("Estrutura da Árvore Degenerada Intercalada:");
+    arvoreI.imprimirArvoreVisual();
+
+    int folhas = arvoreI.contarFolhas();
+    System.out.println("Esperado (1 folha): 1");
+    System.out.println("Resultado: " + folhas);
+    System.out.println("");
+
+    System.out.println("------------------------------------------------------");
+    System.out.println("TESTE 8 – Contar Folhas em Árvore Comum:");
+    ArvoreBinaria<Integer> arvoreComum = new ArvoreBinaria<>();
+
+    NoArvoreBinaria<Integer> T3 = new NoArvoreBinaria<>(3);
+    NoArvoreBinaria<Integer> T7 = new NoArvoreBinaria<>(7);
+    NoArvoreBinaria<Integer> T5 = new NoArvoreBinaria<>(5, T3, T7);
+
+    NoArvoreBinaria<Integer> T20 = new NoArvoreBinaria<>(20);
+    NoArvoreBinaria<Integer> T15 = new NoArvoreBinaria<>(15, null, T20);
+
+    NoArvoreBinaria<Integer> T10 = new NoArvoreBinaria<>(10, T5, T15);
+
+    arvoreComum.setRaiz(T10);
+
+    System.out.println("Estrutura da Árvore Comum:");
+    arvoreComum.imprimirArvoreVisual();
+
+    int folhas2 = arvoreComum.contarFolhas();
+    System.out.println("Esperado (3 folhas: 3, 7, 20): 3");
+    System.out.println("Resultado: " + folhas2);
+    System.out.println("");
+
     
     }
 
