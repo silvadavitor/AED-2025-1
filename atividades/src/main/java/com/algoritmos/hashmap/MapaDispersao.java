@@ -59,4 +59,20 @@ public class MapaDispersao<T>{
 
     }
 
+
+
+    public void realocarMapa(int tamanhoNovo) {
+        ListaEncadeada<NoMapa<T>>[] velho = info;
+        info = new ListaEncadeada[tamanhoNovo];
+
+        for (int i=0; i<velho.length; i++) {
+            if (velho[i] != null) {
+                NoLista<NoMapa<T>> p = velho[i].getPrimeiro();
+                while (p!=null) {
+                    inserir(p.getInfo().getChave(), p.getInfo().getInfo());
+                    p = p.getProximo();
+                }
+            }
+        }
+
 }
