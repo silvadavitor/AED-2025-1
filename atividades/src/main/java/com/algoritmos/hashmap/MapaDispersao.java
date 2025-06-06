@@ -4,15 +4,13 @@ package com.algoritmos.hashmap;
 public class MapaDispersao<T>{
     private ListaEncadeadaGenerica<NoMapa<T>>[] info;
     private int totalElementos;
-    private int tamanho;
 
     public MapaDispersao(int tamanho){
         this.info = new ListaEncadeadaGenerica[tamanho];
-        this.tamanho = tamanho;
     }
 
     private int calcularHash(int chave){
-        return chave % tamanho;
+        return chave % info.length;
     }
 
     public void inserir(int chave, T valor){
@@ -51,20 +49,13 @@ public class MapaDispersao<T>{
         if (info[indice] != null){
             NoMapa<T> noMapa = new NoMapa<>();
             noMapa.setChave(chave);
-            
-            
-            NoLista<NoMapa<T>> no = info[indice].buscar(noMapa); // se tiver a lista, procura o n[o]
-
-            if (no != null){    // só retira se o nó existir na lista
-                info[indice].retirar(noMapa);
-                totalElementos -= 1;
-            }
-            
+            info[indice].retirar(noMapa);
+            totalElementos -= 1;
         }
     }
 
     public double calcularFatorCarga(){
-        return (double) totalElementos / tamanho;
+        return (double) totalElementos / info.length;
 
     }
 
