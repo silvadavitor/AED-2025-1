@@ -58,7 +58,28 @@ public class MapaDispersao<T>{
         return (double) totalElementos / info.length;
 
     }
+    //-----------------------------------------------------
+    // NOVO
 
+    public void ajustarTamanhoSeNecessario() {
+        double fatorAtual = calcularFatorCarga();
+        int novoTamanho = info.length;
+        double FATOR_DESEJADO = 0.75;
+        double FATOR_MAXIMO = 0.9;
+        double FATOR_MINIMO = 0.5;
+        int TAMANHO_MINIMO = 4;
+
+        if (fatorAtual > FATOR_MAXIMO) {
+            novoTamanho = info.length * 2;
+        } else if (fatorAtual < FATOR_MINIMO && info.length > TAMANHO_MINIMO) {
+            novoTamanho = Math.max(TAMANHO_MINIMO, info.length / 2);
+        }
+
+        if (novoTamanho != info.length) {
+            System.out.println("Realocando: tamanho antigo = " + info.length + ", novo = " + novoTamanho);
+            realocarMapa(novoTamanho);
+        }
+    }
 
 
     public void realocarMapa(int tamanhoNovo) {
@@ -77,5 +98,16 @@ public class MapaDispersao<T>{
             }
         }
 
+    }
+
+
+    public int contarColisoes() {
+        int colisoes = 0;
+        for (ListaEncadeadaGenerica<NoMapa<T>> lista : info) {
+            if (lista != null && lista.tamanho() > 1) {
+                colisoes += lista.tamanho() - 1;
+            }
+        }
+        return colisoes;
     }
 }

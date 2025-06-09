@@ -127,5 +127,60 @@ public class ArvoreBinariaBusca<T extends Comparable<T>> extends ArvoreBinariaAb
         }
     }
         return p;
-}
+    }   
+
+
+    //-------------------------------
+    ///NOVO
+    public boolean isDegenerada() {
+        return isDegenerada(raiz);
+    }
+
+    private boolean isDegenerada(NoArvoreBinaria<T> no) {
+        if (no == null) return true;
+
+        if (no.getEsquerda() != null && no.getDireita() != null) {
+            return false; // dois filhos => não é degenerada
+        }
+
+        return isDegenerada(no.getEsquerda()) && isDegenerada(no.getDireita());
+    }
+
+
+    public boolean isCheia() {
+        return isCheia(raiz);
+    }
+
+    private boolean isCheia(NoArvoreBinaria<T> no) {
+        if (no == null) return true;
+
+        boolean temEsq = no.getEsquerda() != null;
+        boolean temDir = no.getDireita() != null;
+
+        if (temEsq != temDir) return false; // só 1 filho => não cheia
+
+        return isCheia(no.getEsquerda()) && isCheia(no.getDireita());
+    }
+
+
+    public boolean isBalanceada() {
+        return isBalanceada(raiz) != -1;
+    }
+
+    private int isBalanceada(NoArvoreBinaria<T> no) {
+        if (no == null) return 0;
+
+        int altEsq = isBalanceada(no.getEsquerda());
+        if (altEsq == -1) return -1;
+
+        int altDir = isBalanceada(no.getDireita());
+        if (altDir == -1) return -1;
+
+        if (Math.abs(altEsq - altDir) > 1) return -1;
+
+        return Math.max(altEsq, altDir) + 1;
+    }
+
+
+
 }
